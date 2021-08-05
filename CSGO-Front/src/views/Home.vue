@@ -1,5 +1,7 @@
 <template>
-	<div class="nav"></div>
+	<div class="nav">
+		<Nav></Nav>
+	</div>
 	<div class="main">
 		<div class="container">
 			<span>CSGO_FRONT</span>
@@ -12,9 +14,11 @@
 
 <script>
 	import UserInfo from "../components/UserInfo.vue";
+	import Nav from "../components/Nav.vue";
 	export default {
-		compoents: {
+		components: {
 			UserInfo,
+			Nav,
 		},
 	};
 </script>
