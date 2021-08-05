@@ -13,17 +13,17 @@
 	</div>
 </template>
 
-<script setup></script>
+<script setup>
+	// import "../scss/global.scss";
+</script>
 
-<style scoped>
+<style lang="scss" scoped>
+	@import "../scss/global.scss";
 	.nav {
 		position: fixed;
 		height: 100vh;
 		width: 100px;
-		background: rgba(255, 255, 255, 0.2);
-		box-shadow: 0 8px 32px 0 rgba(63, 68, 141, 0.37);
-		backdrop-filter: blur(40px);
-		-webkit-backdrop-filter: blur(40px);
+		@include glass-blur;
 	}
 	.user::before,
 	.nav::before {
@@ -50,10 +50,7 @@
 		width: 400px;
 		top: 0px;
 		right: -300px;
-		background: rgba(255, 255, 255, 0.2);
-		box-shadow: 0 8px 32px 0 rgba(63, 68, 141, 0.37);
-		backdrop-filter: blur(40px);
-		-webkit-backdrop-filter: blur(40px);
+		@include glass-blur;
 		transition: all 0.5s;
 	}
 	.view {
