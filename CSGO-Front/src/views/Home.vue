@@ -1,5 +1,7 @@
 <template>
-	<div class="nav"></div>
+	<div class="nav">
+		<Nav></Nav>
+	</div>
 	<div class="main">
 		<div class="container">
 			<span>CSGO_FRONT</span>
@@ -13,8 +15,15 @@
 	</div>
 </template>
 
-<script setup>
-	// import "../scss/global.scss";
+
+<script>
+	import Nav from '../components/Nav.vue';
+	export default {
+		components:{
+			Nav,
+		}
+	}
+
 </script>
 
 <style lang="scss" scoped>
