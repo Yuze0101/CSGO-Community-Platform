@@ -6,15 +6,17 @@
 		</div>
 	</div>
 	<div class="user">
-		<p>123</p>
-		<p>123</p>
-		<p>123</p>
-		<p>123</p>
+		<UserInfo />
 	</div>
 </template>
 
-<script setup>
-	// import "../scss/global.scss";
+<script>
+	import UserInfo from "../components/UserInfo.vue";
+	export default {
+		compoents: {
+			UserInfo,
+		},
+	};
 </script>
 
 <style lang="scss" scoped>
@@ -52,11 +54,6 @@
 		right: -300px;
 		@include glass-blur;
 		transition: all 0.5s;
-	}
-	.view {
-		background-color: red;
-		position: absolute;
-		top: 0;
 	}
 	.user:hover {
 		transform: translateX(-300px);
