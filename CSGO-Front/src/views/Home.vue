@@ -1,20 +1,26 @@
 <template>
-	<div class="nav"></div>
+	<div class="nav">
+		<Nav></Nav>
+	</div>
 	<div class="main">
 		<div class="container">
 			<span>CSGO_FRONT</span>
 		</div>
 	</div>
 	<div class="user">
-		<p>123</p>
-		<p>123</p>
-		<p>123</p>
-		<p>123</p>
+		<UserInfo />
 	</div>
 </template>
 
-<script setup>
-	// import "../scss/global.scss";
+<script>
+	import UserInfo from "../components/UserInfo.vue";
+	import Nav from "../components/Nav.vue";
+	export default {
+		components: {
+			UserInfo,
+			Nav,
+		},
+	};
 </script>
 
 <style lang="scss" scoped>
@@ -52,11 +58,6 @@
 		right: -300px;
 		@include glass-blur;
 		transition: all 0.5s;
-	}
-	.view {
-		background-color: red;
-		position: absolute;
-		top: 0;
 	}
 	.user:hover {
 		transform: translateX(-300px);
