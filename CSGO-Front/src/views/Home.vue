@@ -13,8 +13,8 @@
 </template>
 
 <script>
-	import UserInfo from "../components/UserInfo.vue";
-	import Nav from "../components/Nav.vue";
+	import UserInfo from "@/components/UserInfo.vue";
+	import Nav from "@/components/Nav.vue";
 	export default {
 		components: {
 			UserInfo,
@@ -24,7 +24,7 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "../scss/global.scss";
+	@import "@/scss/global.scss";
 	.nav {
 		position: fixed;
 		height: 100vh;
