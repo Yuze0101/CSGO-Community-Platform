@@ -12,17 +12,10 @@
 	</div>
 </template>
 
-<script>
+<script setup>
 	import UserInfo from "@/components/UserInfo.vue";
 	import Nav from "@/components/Nav.vue";
 	import MainPage from "../components/MainPage.vue";
-	export default {
-		components: {
-			UserInfo,
-			Nav,
-			MainPage,
-		},
-	};
 </script>
 
 <style lang="scss" scoped>

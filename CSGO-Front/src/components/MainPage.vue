@@ -55,19 +55,19 @@
 							<span>{{ item.name }}</span>
 						</li>
 					</ul>
-					<!-- <Swiper
-					class="swiper"
-					:slides-per-view="1"
-					:space-between="50"
-					@slideChange="onSlideChange"
-					@swiper="onSwiper"
-					:pagination="{ clickable: true }"
-				>
-					<SwiperSlide class="swiper-slide">Slide 2 </SwiperSlide>
-					<SwiperSlide class="swiper-slide">Slide 2</SwiperSlide>
-					<SwiperSlide class="swiper-slide">Slide 3</SwiperSlide>
-					<SwiperSlide class="swiper-slide">Slide 4</SwiperSlide>
-				</Swiper> -->
+					<Swiper
+						class="swiper"
+						:slides-per-view="1"
+						:space-between="50"
+						@slideChange="onSlideChange"
+						@swiper="onSwiper"
+						:pagination="{ clickable: true }"
+					>
+						<SwiperSlide class="swiper-slide">Slide 1</SwiperSlide>
+						<SwiperSlide class="swiper-slide">Slide 2</SwiperSlide>
+						<SwiperSlide class="swiper-slide">Slide 3</SwiperSlide>
+						<SwiperSlide class="swiper-slide">Slide 4</SwiperSlide>
+					</Swiper>
 				</div>
 			</div>
 		</div>
