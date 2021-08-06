@@ -4,7 +4,7 @@
 	</div>
 	<div class="main">
 		<div class="container">
-			<span>CSGO_FRONT</span>
+			<MainPage></MainPage>
 		</div>
 	</div>
 	<div class="user">
@@ -15,10 +15,12 @@
 <script>
 	import UserInfo from "../components/UserInfo.vue";
 	import Nav from "../components/Nav.vue";
+	import MainPage from "../components/MainPage.vue";
 	export default {
 		components: {
 			UserInfo,
 			Nav,
+			MainPage,
 		},
 	};
 </script>
