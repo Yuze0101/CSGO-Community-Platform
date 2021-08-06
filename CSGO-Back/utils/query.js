@@ -21,3 +21,4 @@ const query = (sql, callback) => {
 		});
 	});
 };
+module.exports = { query };

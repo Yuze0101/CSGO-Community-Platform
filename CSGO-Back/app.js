@@ -10,9 +10,19 @@ const logger = require("koa-logger");
 const index = require("./routes/index");
 const users = require("./routes/users");
 
+// NOTE 封装数据库sql语句以及使用
+// const { CREATE_TABLE } = require("./utils/sql");
+// const { query } = require("./utils/query");
+// query(CREATE_TABLE);
+
 // error handler
 onerror(app);
 
+//	处理跨域请求
+app.use(async (ctx, next) => {
+	ctx.set("Access-Control-Allow-Origin", "*");
+	await next();
+});
 // middlewares
 app.use(
 	bodyparser({
@@ -38,14 +48,12 @@ app.use(async (ctx, next) => {
 });
 
 // routes
-app.use(index.routes(), index.allowedMethods());
+app.use(index.routes());
 app.use(users.routes(), users.allowedMethods());
 
 // error-handling
 app.on("error", (err, ctx) => {
 	console.error("server error", err, ctx);
 });
-app.listen(8888, () => {
-	console.log("server started on port 8888");
-});
+
 module.exports = app;
