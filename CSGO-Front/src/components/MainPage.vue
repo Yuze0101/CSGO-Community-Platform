@@ -40,7 +40,6 @@
                                 src="http://s2.328888.xyz/2021/08/06/114ca7c991bcf.jpg"
                                 class="card-img"
                             />
-
                             <div class="card-text">
                                 <div class="card-time">2020-01-01</div>
                                 <div class="card-title">A New Horizon</div>
