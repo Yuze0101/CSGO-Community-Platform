@@ -59,14 +59,9 @@
 	</div>
 </template>
 
-<script>
+<script setup>
 	import { Swiper, SwiperSlide } from "swiper/vue";
 	import "swiper/swiper.scss";
-	export default {
-		components: { Swiper, SwiperSlide },
-	};
-</script>
-<script setup>
 	import { reactive } from "vue";
 	const state = reactive({
 		current: 0,
