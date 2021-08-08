@@ -183,26 +183,7 @@ const swiperChange = num => {
 .scroll {
     padding: 10px;
     overflow: scroll;
-    &::-webkit-scrollbar {
-        padding: 10px;
-        width: 10px;
-        height: 10px;
-    }
-    &::-webkit-scrollbar-thumb {
-        background: #b3afb3;
-        border-radius: 30px;
-    }
-    &::-webkit-scrollbar-thumb:hover {
-        background: #d1d1d1;
-    }
-    &::-webkit-scrollbar-track {
-        background: #ffffff00;
-        border-radius: 30px;
-        box-shadow: inset 0px 0px 0px 0px #f0f0f0;
-    }
-    &::-webkit-scrollbar-corner {
-        width: 0;
-    }
+    @include scrollbar;
 }
 .news {
     font-weight: bold;

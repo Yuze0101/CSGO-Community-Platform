@@ -4,7 +4,8 @@
 	</div>
 	<div class="main">
 		<div class="container">
-			<MainPage></MainPage>
+			<!-- <MainPage></MainPage> -->
+			<PlayPage></PlayPage>
 		</div>
 	</div>
 	<div class="user">
@@ -16,7 +17,7 @@
 	import UserInfo from "@/components/UserInfo.vue";
 	import Nav from "@/components/Nav.vue";
 	import MainPage from "../components/MainPage.vue";
-
+	import PlayPage from "../components/PlayPage.vue"
 	import { onMounted } from "@vue/runtime-core";
 	import axios from "axios";
 	
