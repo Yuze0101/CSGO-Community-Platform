@@ -18,7 +18,7 @@ const users = require("./routes/users");
 // error handler
 onerror(app);
 
-//	处理跨域请求
+// NOTE	处理跨域请求
 app.use(async (ctx, next) => {
 	ctx.set("Access-Control-Allow-Origin", "*");
 	await next();
