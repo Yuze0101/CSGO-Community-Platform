@@ -4,8 +4,8 @@
 	</div>
 	<div class="main">
 		<div class="container">
-			<!-- <MainPage></MainPage> -->
-			<PlayPage></PlayPage>
+			<MainPage></MainPage>
+			<!-- <PlayPage></PlayPage> -->
 		</div>
 	</div>
 	<div class="user">
@@ -35,7 +35,7 @@
 	.nav {
 		position: fixed;
 		height: 100vh;
-		width: 100px;
+		width: 6.25rem;
 		@include glass-blur;
 	}
 	.user::before,
@@ -50,7 +50,7 @@
 	}
 	.main {
 		height: 100vh;
-		padding: 0 100px;
+		padding: 0 6.25rem;
 		background-image: url(http://s2.328888.xyz/2021/08/05/00cc614272dc0.jpg);
 		background-repeat: no-repeat;
 		background-size: cover;
@@ -60,14 +60,14 @@
 		color: #fff;
 		position: fixed;
 		height: 100vh;
-		width: 400px;
-		top: 0px;
-		right: -300px;
+		width: 25rem;
+		top: 0rem;
+		right: -18.75rem;
 		@include glass-blur;
 		transition: all 0.5s;
 	}
 	.user:hover {
-		transform: translateX(-300px);
+		transform: translateX(-18.75rem);
 	}
 	.container {
 		margin: 0 auto;

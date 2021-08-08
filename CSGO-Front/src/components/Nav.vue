@@ -33,8 +33,8 @@ export default {
         align-items: center;
     }
     .list-item{
-        width: 100px;
-        height: 100px;
+        width: 6.25rem;
+        height: 6.25rem;
         display: flex;
         align-items: center;
         justify-content: center;

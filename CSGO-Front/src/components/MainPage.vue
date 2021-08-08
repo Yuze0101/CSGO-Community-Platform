@@ -161,7 +161,7 @@ const swiperChange = num => {
     flex-direction: column;
 }
 .scroll-box {
-    padding: 20px;
+    padding: 1.25rem;
     width: 100%;
     height: 70%;
     box-sizing: border-box;
@@ -171,52 +171,52 @@ const swiperChange = num => {
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 0.625rem;
     height: 100%;
     @include glass-blur;
 }
 .title {
     width: 100%;
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
 }
 .scroll {
-    padding: 10px;
+    padding: 0.625rem;
     overflow: scroll;
     @include scrollbar;
 }
 .news {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 .card {
     box-shadow: 3px 3px 10px #00000052;
     box-sizing: border-box;
-    margin: 10px 0;
+    margin: 0.625rem 0;
     width: 100%;
-    height: 400px;
+    height: 25rem;
     position: relative;
 }
 .card-img {
     width: 100%;
-    height: 400px;
+    height: 25rem;
 }
 .card-text {
     width: 100%;
-    height: 150px;
-    padding: 20px;
+    height: 9.375rem;
+    padding: 1.25rem;
     box-sizing: border-box;
     @include glass-blur;
     position: absolute;
     bottom: 0;
     .card-time {
-        font-size: 12px;
+        font-size: 0.75rem;
     }
     .card-title {
         letter-spacing: 3px;
-        line-height: 50px;
+        line-height: 3.125rem;
         font-weight: bold;
-        font-size: 20px;
+        font-size: 1.25rem;
     }
     .card-info {
         letter-spacing: 1px;
@@ -224,7 +224,7 @@ const swiperChange = num => {
 }
 .shop-box {
     box-sizing: border-box;
-    padding: 20px;
+    padding: 1.25rem;
     width: 100%;
     height: 30%;
 }
@@ -232,7 +232,7 @@ const swiperChange = num => {
     @include glass-blur;
     box-sizing: border-box;
     height: 100%;
-    padding: 10px;
+    padding: 0.625rem;
 }
 .right {
     // background-color: rgba(180, 143, 188, 0.418);
@@ -241,7 +241,7 @@ const swiperChange = num => {
 }
 
 .tab {
-    height: 40px;
+    height: 2.5rem;
     margin: 0;
     padding: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
@@ -251,14 +251,14 @@ const swiperChange = num => {
     justify-content: left;
 }
 .tab li {
-    width: 80px;
+    width: 5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     &.active::after {
         @include tab-bottom-border;
-        width: 40px;
+        width: 2.5rem;
     }
     &:hover::after {
         @include tab-change;
@@ -282,8 +282,8 @@ const swiperChange = num => {
         flex-direction: column;
         align-items: center;
         .img-box {
-            width: 150px;
-            height: 150px;
+            width: 9.375rem;
+            height: 9.375rem;
             img {
                 width: 100%;
                 height: 100%;
@@ -291,16 +291,16 @@ const swiperChange = num => {
         }
         .info p {
             margin: 0;
-            line-height: 20px;
+            line-height: 1.25rem;
         }
         .info {
             flex-grow: 1;
             .describe {
-                font-size: 12px;
+                font-size: 0.75rem;
                 letter-spacing: 1px;
             }
             .price {
-                font-size: 16px;
+                font-size: 1rem;
                 font-weight: bold;
                 color: greenyellow;
             }
