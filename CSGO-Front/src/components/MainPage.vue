@@ -116,39 +116,40 @@
                 </div>
             </div>
         </div>
-        <div class="right"></div>
+        <div class="right">
+        </div>
     </div>
 </template>
 <script>
-import { Swiper, SwiperSlide } from "swiper/vue";
-import "swiper/swiper.scss";
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/swiper.scss';
 export default {
     components: { Swiper, SwiperSlide },
 };
 </script>
 <script setup>
-import { reactive } from "vue";
+import { reactive } from 'vue';
 const state = reactive({
     tabs: [
-        { id: 0, name: "贴纸" },
-        { id: 1, name: "商店" },
-        { id: 2, name: "钥匙" },
-        { id: 3, name: "市场" },
+        { id: 0, name: '贴纸' },
+        { id: 1, name: '商店' },
+        { id: 2, name: '钥匙' },
+        { id: 3, name: '市场' },
     ],
 });
-const onSwiper = (swiper) => {
+const onSwiper = swiper => {
     state.mySwiper = swiper;
 };
-const onSlideChange = (x) => {
+const onSlideChange = x => {
     state.current = x.activeIndex;
 };
-const swiperChange = (num) => {
+const swiperChange = num => {
     state.mySwiper.slideTo(num);
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/global.scss";
+@import '../scss/global.scss';
 .container {
     color: white;
     display: flex;
@@ -182,26 +183,7 @@ const swiperChange = (num) => {
 .scroll {
     padding: 10px;
     overflow: scroll;
-    &::-webkit-scrollbar {
-        padding: 10px;
-        width: 10px;
-        height: 10px;
-    }
-    &::-webkit-scrollbar-thumb {
-        background: #b3afb3;
-        border-radius: 30px;
-    }
-    &::-webkit-scrollbar-thumb:hover {
-        background: #d1d1d1;
-    }
-    &::-webkit-scrollbar-track {
-        background: #ffffff00;
-        border-radius: 30px;
-        box-shadow: inset 0px 0px 0px 0px #f0f0f0;
-    }
-    &::-webkit-scrollbar-corner {
-        width: 0;
-    }
+    @include scrollbar;
 }
 .news {
     font-weight: bold;
@@ -286,7 +268,7 @@ const swiperChange = (num) => {
     }
 }
 .swiper {
-	box-sizing: border-box;
+    box-sizing: border-box;
     height: calc(100% - 40px);
 }
 .swiper-slide {
@@ -309,20 +291,20 @@ const swiperChange = (num) => {
         }
         .info p {
             margin: 0;
-			line-height: 20px;
+            line-height: 20px;
         }
-		.info {
-			flex-grow: 1;
-			.describe {
-				font-size: 12px;
-				letter-spacing: 1px;
-			}
-			.price {
-				font-size: 16px;
-				font-weight: bold;
-				color: greenyellow;
-			}
-		}
+        .info {
+            flex-grow: 1;
+            .describe {
+                font-size: 12px;
+                letter-spacing: 1px;
+            }
+            .price {
+                font-size: 16px;
+                font-weight: bold;
+                color: greenyellow;
+            }
+        }
     }
 }
 </style>
