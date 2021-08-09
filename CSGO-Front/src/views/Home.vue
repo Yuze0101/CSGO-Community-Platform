@@ -4,8 +4,12 @@
 	</div>
 	<div class="main">
 		<div class="container">
-			<MainPage></MainPage>
-			<!-- <PlayPage></PlayPage> -->
+			<!-- <MainPage></MainPage> -->
+			<router-view v-slot="{ Component }">
+				<transition name="fade">
+					<component :is="Component" />
+				</transition>
+			</router-view>
 		</div>
 	</div>
 	<div class="user">
@@ -16,18 +20,6 @@
 <script setup>
 	import UserInfo from "@/components/UserInfo.vue";
 	import Nav from "@/components/Nav.vue";
-	import MainPage from "../components/MainPage.vue";
-	import PlayPage from "../components/PlayPage.vue"
-	import { onMounted } from "@vue/runtime-core";
-	import axios from "axios";
-	
-	onMounted(async () => {
-		const res = await axios({
-			url: "http://127.0.0.1:4000/string",
-			method: "get",
-		});
-		console.log("res :>> ", res);
-	});
 </script>
 
 <style lang="scss" scoped>
@@ -72,5 +64,19 @@
 	.container {
 		margin: 0 auto;
 		height: 100%;
+		overflow: hidden;
+	}
+
+	.fade-enter-active,
+	.fade-leave-active {
+		transition: all 1s;
+	}
+	.fade-enter,
+	.fade-leave-to {
+		opacity: 0;
+	}
+	.fade-enter-to,
+	.fade-leave {
+		opacity: 1;
 	}
 </style>
