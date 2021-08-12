@@ -86,24 +86,6 @@
                         <p>人数<span>4-5</span></p>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-img">
-                        <img src="../assets/map-card-image/nuke.jpg" />
-                    </div>
-                    <div class="card-info">
-                        <p>地图名称</p>
-                        <p>人数<span>4-5</span></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-img">
-                        <img src="../assets/map-card-image/nuke.jpg" />
-                    </div>
-                    <div class="card-info">
-                        <p>地图名称</p>
-                        <p>人数<span>4-5</span></p>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="foot">
@@ -130,23 +112,23 @@
     flex-direction: column;
 }
 .play-info {
-    height: 140px;
+    height: 8.75rem;
 }
 h1 {
     margin: 0;
-    line-height: 100px;
+    line-height: 6.25rem;
     color: rgba(255, 255, 255, 0.5);
-    padding: 0 20px;
+    padding: 0 1.25rem;
 }
 .select-box {
-    height: 40px;
+    height: 2.5rem;
     .select {
-        padding-left: 10px;
+        padding-left: 0.625rem;
         display: inline-block;
         height: 100%;
-        width: 200px;
+        width: 12.5rem;
         color: #fff;
-        font-size: 16px;
+        font-size: 1rem;
         outline: none;
         border: none;
         background-color: rgba(0, 0, 0, 0.2);
@@ -157,7 +139,7 @@ h1 {
 }
 .card-box {
     display: flex;
-    padding: 20px 60px;
+    padding: 1.25rem 6.25rem;
     box-sizing: border-box;
     flex-wrap: wrap;
     height: calc(100vh - 221px);
@@ -165,12 +147,12 @@ h1 {
     @include scrollbar;
     background-color: rgba(0, 0, 0, 0.15);
     .card {
-        width: 240px;
-        height: 320px;
+        width: 15rem;
+        height: 20rem;
         overflow: hidden;
         position: relative;
         box-sizing: border-box;
-        margin: 10px;
+        margin: 0.625rem;
         .card-img {
             height: 100%;
             width: 100%;
@@ -189,11 +171,11 @@ h1 {
             align-items: center;
         }
         &.active {
-            border: 10px solid #fff;
+            border: 0.625rem solid #fff;
             transition: all 0.2s;
         }
         &:hover {
-            border: 10px solid #fff;
+            border: 0.625rem solid #fff;
             transition: all 0.2s;
         }
     }
@@ -206,15 +188,15 @@ h1 {
     box-sizing: border-box;
     justify-content: flex-end;
     align-items: center;
-    padding: 20px 40px;
+    padding: 1.25rem 2.5rem;
     background-color: rgba(0, 0, 0, 0.15);
     border-top: 1px solid rgba(255, 255, 255, 0.5);
     button {
-        width: 250px;
-        height: 40px;
+        width: 15.625rem;
+        height: 2.5rem;
         border: none;
         outline: none;
-        font-size: 20px;
+        font-size: 1.25rem;
         font-weight: bold;
         text-shadow: 3px 3px 3px black;
         position: relative;
@@ -230,12 +212,12 @@ h1 {
         }
         &.waiting::after {
             content: '';
-            width: 50px;
-            height: 40px;
+            width: 3.125rem;
+            height: 2.5rem;
             display: inline-block;
             background: linear-gradient(90deg, #39be4000, #39be406e, #39be40);
             position: absolute;
-            left: -50px;
+            left: -3.125rem;
             top: 0;
             animation: scanner 4s linear infinite;
             animation-delay: 3s;
@@ -256,7 +238,7 @@ h1 {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(500px);
+        transform: translateX(31.25rem);
     }
 }
 </style>

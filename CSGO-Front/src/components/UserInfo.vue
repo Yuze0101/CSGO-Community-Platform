@@ -46,7 +46,7 @@
 						:class="item.active ? 'active' : ''"
 						src="../assets/icons/bingmoli.jpg"
 					/>
-					<div style="padding-left: 30px">
+					<div style="padding-left: 1.875rem">
 						<p class="friend-name">{{ item.name }}</p>
 						<p class="playing">{{ item.play }}</p>
 					</div>
@@ -94,7 +94,7 @@
 <style lang="scss" scoped>
 	@import "../scss/global.scss";
 	.userInfo-box {
-		padding-bottom: 20px;
+		padding-bottom: 1.25rem;
 		display: flex;
 		flex-direction: column;
 		font-weight: bold;
@@ -105,27 +105,27 @@
 	}
 	.userName {
 		margin: 0;
-		line-height: 50px;
-		font-size: 20px;
+		line-height: 3.125rem;
+		font-size: 1.25rem;
 	}
 	.avatar-box {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 100px;
-		height: 100px;
+		width: 6.25rem;
+		height: 6.25rem;
 	}
 	.avatar {
-		width: 80px;
-		height: 80px;
+		width: 5rem;
+		height: 5rem;
 	}
 	.userDetai-box {
 		display: flex;
 		flex-direction: column;
 	}
 	.medal {
-		width: 40px;
-		height: 40px;
+		width: 2.5rem;
+		height: 2.5rem;
 	}
 	.rank {
 		display: flex;
@@ -134,20 +134,20 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		height: 50px;
-		width: 100px;
+		height: 3.125rem;
+		width: 6.25rem;
 	}
 	.rank-icon {
-		width: 80px;
+		width: 5rem;
 	}
 	.rank-detail {
 		margin: 0;
-		line-height: 50px;
-		letter-spacing: 5px;
+		line-height: 3.125rem;
+		letter-spacing: 0.3125rem;
 	}
 
 	.tab {
-		height: 60px;
+		height: 3.75rem;
 		margin: 0;
 		padding: 0;
 		list-style-type: none;
@@ -162,7 +162,7 @@
 		position: relative;
 		&.active::after {
 			@include tab-bottom-border;
-			width: 40px;
+			width: 2.5rem;
 		}
 		&:hover::after {
 			@include tab-change;
@@ -172,8 +172,8 @@
 		}
 	}
 	.tab-img {
-		width: 40px;
-		height: 40px;
+		width: 2.5rem;
+		height: 2.5rem;
 		&:hover {
 			cursor: pointer;
 		}
@@ -183,15 +183,15 @@
 	}
 	.swiper {
 		height: 100%;
-		padding: 20px;
+		padding: 1.25rem;
 	}
 	.friend-box {
 		display: flex;
 		align-items: center;
 	}
 	.friend-avatar {
-		width: 60px;
-		height: 60px;
+		width: 3.75rem;
+		height: 3.75rem;
 		border-left: 5px solid #2f729d;
 		&.active {
 			border-left: 5px solid #47a04f;
