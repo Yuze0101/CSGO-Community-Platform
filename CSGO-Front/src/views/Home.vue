@@ -6,7 +6,7 @@
 		<div class="container">
 			<!-- <MainPage></MainPage> -->
 			<router-view v-slot="{ Component }">
-				<transition name="fade">
+				<transition name="slide">
 					<component :is="Component" />
 				</transition>
 			</router-view>
@@ -18,8 +18,8 @@
 </template>
 
 <script setup>
-	import UserInfo from "@/components/UserInfo.vue";
-	import Nav from "@/components/Nav.vue";
+	import UserInfo from "@/components/UserInfo.vue"
+	import Nav from "@/components/Nav.vue"
 </script>
 
 <style lang="scss" scoped>
@@ -67,16 +67,20 @@
 		overflow: hidden;
 	}
 
-	.fade-enter-active,
-	.fade-leave-active {
-		transition: all 1s;
+	.slide-enter-active {
+		transition: all 0.3s;
+		transition-delay: 0.3s;
 	}
-	.fade-enter,
-	.fade-leave-to {
-		opacity: 0;
+
+	.slide-leave-active {
+		transition: all 0.3s;
 	}
-	.fade-enter-to,
-	.fade-leave {
-		opacity: 1;
+	.slide-enter-from,
+	.slide-leave-to {
+		transform: translateX(-1600px);
+	}
+	.slide-enter-to,
+	.slide-leave-from {
+		transform: translateX(0);
 	}
 </style>

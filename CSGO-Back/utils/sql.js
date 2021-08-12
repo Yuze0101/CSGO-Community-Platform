@@ -8,4 +8,5 @@ const SELECT_TABLE = (tableName) => `SELECT * FROM ${tableName}`;
 
 module.exports = {
 	CREATE_TABLE,
+    SELECT_TABLE
 };
