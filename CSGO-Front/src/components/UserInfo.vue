@@ -39,16 +39,36 @@
 			@swiper="onSwiper"
 			:pagination="{ clickable: true }"
 		>
-			<SwiperSlide class="swiper-slide">
+			<SwiperSlide class="swiper-slide" :class="state.goChat ? 'active-reverse' : 'avtive-colum'">
 				<div class="friend-box" v-for="item in state.friends" :key="item.id">
-					<img
-						class="friend-avatar"
-						:class="item.active ? 'active' : ''"
-						src="../assets/icons/bingmoli.jpg"
-					/>
-					<div style="padding-left: 1.875rem">
-						<p class="friend-name">{{ item.name }}</p>
-						<p class="playing">{{ item.play }}</p>
+					<div class="friend-info">
+						<img
+							class="friend-avatar"
+							:class="item.active ? 'active' : ''"
+							src="../assets/icons/bingmoli.jpg"
+						/>
+						<div style="padding-left: 1.875rem">
+							<p class="friend-name">{{ item.name }}</p>
+							<p class="playing">{{ item.play }}</p>
+						</div>
+					</div>
+					<img @click="goChat(item.id)" class="chat" src="../assets/icons/CenteredDots.png" />
+				</div>
+				<div class="chat-box">
+					<div class="chat-info"><span>好友用户名</span><span>状态</span></div>
+					<div class="chat-buble-box">
+						<div>
+							<p><img src="" alt="好友头像" /><span>好友用户名</span></p>
+							<p>聊天内容1</p>
+						</div>
+						<div>
+							<p><img src="" alt="用户头像" /><span>用户名</span></p>
+							<p>聊天内容2</p>
+						</div>
+					</div>
+					<div class="chat-input-box">
+						<textarea name="" id="" cols="30" rows="10"></textarea>
+						<button>发送</button>
 					</div>
 				</div>
 			</SwiperSlide>
@@ -60,9 +80,9 @@
 </template>
 
 <script setup>
-	import { Swiper, SwiperSlide } from "swiper/vue";
-	import "swiper/swiper.scss";
-	import { reactive } from "vue";
+	import { Swiper, SwiperSlide } from "swiper/vue"
+	import "swiper/swiper.scss"
+	import { reactive } from "vue"
 	const state = reactive({
 		current: 0,
 		// FIXME 图片路径需要改为服务器的路径
@@ -80,16 +100,21 @@
 			{ id: 3, name: "四只冰茉莉", active: false, play: "犯困中...", avatar: "" },
 		],
 		mySwiper: {},
-	});
+		goChat: false,
+	})
 	const onSwiper = (swiper) => {
-		state.mySwiper = swiper;
-	};
+		state.mySwiper = swiper
+	}
 	const onSlideChange = (x) => {
-		state.current = x.activeIndex;
-	};
+		state.current = x.activeIndex
+	}
 	const swiperChange = (num) => {
-		state.mySwiper.slideTo(num);
-	};
+		state.mySwiper.slideTo(num)
+	}
+	const goChat = (id) => {
+		console.log(id)
+		state.goChat = true
+	}
 </script>
 <style lang="scss" scoped>
 	@import "../scss/global.scss";
@@ -185,7 +210,23 @@
 		height: 100%;
 		padding: 1.25rem;
 	}
+	.swiper-slide {
+		display: flex;
+		flex-direction: column;
+	}
+	.active-colum {
+		flex-direction: column;
+	}
+	.active-reverse {
+		flex-direction: column-reverse;
+	}
 	.friend-box {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+	}
+	.friend-info {
 		display: flex;
 		align-items: center;
 	}
@@ -197,10 +238,16 @@
 			border-left: 5px solid #47a04f;
 		}
 	}
+	.chat {
+		width: 2rem;
+	}
 	.friend-name {
 		font-weight: bold;
 	}
 	.playing {
 		color: #bac4cb;
+	}
+	.chat-box {
+		height: 100%;
 	}
 </style>
