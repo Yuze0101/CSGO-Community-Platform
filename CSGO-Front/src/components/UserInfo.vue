@@ -39,7 +39,33 @@
 			@swiper="onSwiper"
 			:pagination="{ clickable: true }"
 		>
-			<SwiperSlide class="swiper-slide" :class="state.goChat ? 'active-reverse' : 'avtive-colum'">
+			<SwiperSlide class="swiper-slide">
+				<div class="chat-box" :class="state.goChat ? 'active' : ''">
+					<div class="chat-info">
+						<div><span>【好友用户名】</span><span>状态</span></div>
+						<div @click="back()">
+							<span>x</span>
+						</div>
+					</div>
+					<div class="chat-buble-box">
+						<div class="chat-from">
+							<div class="buble">
+								<div class="chat-avator"><img src="../assets/icons/bingmoli.jpg" alt="好友头像" /></div>
+								<div><p class="time">17:52</p><p>天内天内容聊天</p></div>
+							</div>
+						</div>
+						<div class="chat-to">
+							<div class="buble">
+								<div><p class="time">17:52</p><p>聊天内容2</p></div>
+								<div class="chat-avator"><img src="../assets/icons/avatar.jpeg" alt="用户头像" /></div>
+							</div>
+						</div>
+					</div>
+					<div class="chat-input-box">
+						<textarea name="" id="" cols="30" rows="10"></textarea>
+						<button>发送</button>
+					</div>
+				</div>
 				<div class="friend-box" v-for="item in state.friends" :key="item.id">
 					<div class="friend-info">
 						<img
@@ -53,23 +79,6 @@
 						</div>
 					</div>
 					<img @click="goChat(item.id)" class="chat" src="../assets/icons/CenteredDots.png" />
-				</div>
-				<div class="chat-box">
-					<div class="chat-info"><span>好友用户名</span><span>状态</span></div>
-					<div class="chat-buble-box">
-						<div>
-							<p><img src="" alt="好友头像" /><span>好友用户名</span></p>
-							<p>聊天内容1</p>
-						</div>
-						<div>
-							<p><img src="" alt="用户头像" /><span>用户名</span></p>
-							<p>聊天内容2</p>
-						</div>
-					</div>
-					<div class="chat-input-box">
-						<textarea name="" id="" cols="30" rows="10"></textarea>
-						<button>发送</button>
-					</div>
 				</div>
 			</SwiperSlide>
 			<SwiperSlide class="swiper-slide">Slide 2</SwiperSlide>
@@ -114,6 +123,10 @@
 	const goChat = (id) => {
 		console.log(id)
 		state.goChat = true
+		console.log(state.goChat)
+	}
+	const back = () => {
+		state.goChat = false
 	}
 </script>
 <style lang="scss" scoped>
@@ -211,14 +224,9 @@
 		padding: 1.25rem;
 	}
 	.swiper-slide {
-		display: flex;
-		flex-direction: column;
-	}
-	.active-colum {
-		flex-direction: column;
-	}
-	.active-reverse {
-		flex-direction: column-reverse;
+		height: 100%;
+		// display: flex;
+		// flex-direction: column;
 	}
 	.friend-box {
 		display: flex;
@@ -248,6 +256,72 @@
 		color: #bac4cb;
 	}
 	.chat-box {
-		height: 100%;
+		height: 0rem;
+		overflow: hidden;
+		.chat-info {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		.chat-buble-box {
+			width: 100%;
+			.chat-avator {
+				width: 3rem;
+				height: 3rem;
+				padding: 0.4rem;
+				flex-shrink: 0;
+				img {
+					width: 100%;
+					height: 100%;
+				}
+			}
+			.buble {
+				display: flex;
+				align-items:flex-start;
+				p {
+					margin: 0;
+					padding: 0;
+				}
+				.time {
+					color: rgba(255, 255, 255, 0.5);
+					font-size: .075rem;
+				}
+			}
+			.chat-from {
+				width: 100%;
+				// height: 4rem;
+				display: flex;
+			}
+			.chat-to {
+				width: 100%;
+				// height: 4rem;
+				display: flex;
+				flex-direction: row-reverse;
+				text-align: right;
+			}
+		}
+		animation: hideChat 0.5s;
+			animation-fill-mode: forwards;
+		&.active {
+			animation: showChat 0.5s;
+			animation-fill-mode: forwards;
+		}
+	}
+
+	@keyframes showChat {
+		0% {
+			height: 0rem;
+		}
+		100% {
+			height: 100%;
+		}
+	}
+	@keyframes hideChat {
+		0% {
+			height: 100%;
+		}
+		100% {
+			height: 0rem;
+		}
 	}
 </style>

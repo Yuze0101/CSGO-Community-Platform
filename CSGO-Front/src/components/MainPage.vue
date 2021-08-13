@@ -124,23 +124,19 @@
 	onMounted(async () => {
 		console.log("mounted")
 		console.log("index componentDidMount")
-		const ws = new WebSocket("ws://127.0.0.1:5001/koa/ws")
+		const ws = new WebSocket("ws://192.168.13.8:5001/koa/ws?id=44")
 		ws.onopen = (evt) => {
 			console.log("Connect open...")
 			let msg = JSON.stringify({
-				id: 0,
-				data: "hello Websocket",
+				uId: 22,
+				data: "hello 22",
 			})
 			ws.send(msg)
 		}
 		ws.onmessage = function (evt) {
 			console.log("Received Message: " + evt.data)
-			ws.close()
+			// ws.close()
 		}
-		// const res = await $axios({
-		// 	url: "/string",
-		// })
-		// console.log(`res`, res)
 	})
 
 	const state = reactive({
