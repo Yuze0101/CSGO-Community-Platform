@@ -40,16 +40,45 @@
 			:pagination="{ clickable: true }"
 		>
 			<SwiperSlide class="swiper-slide">
-				<div class="friend-box" v-for="item in state.friends" :key="item.id">
-					<img
-						class="friend-avatar"
-						:class="item.active ? 'active' : ''"
-						src="../assets/icons/bingmoli.jpg"
-					/>
-					<div style="padding-left: 1.875rem">
-						<p class="friend-name">{{ item.name }}</p>
-						<p class="playing">{{ item.play }}</p>
+				<div class="chat-box" :class="state.goChat ? 'active' : ''">
+					<div class="chat-info">
+						<div><span>【好友用户名】</span><span>状态</span></div>
+						<div @click="back()">
+							<span>x</span>
+						</div>
 					</div>
+					<div class="chat-buble-box">
+						<div class="chat-from">
+							<div class="buble">
+								<div class="chat-avator"><img src="../assets/icons/bingmoli.jpg" alt="好友头像" /></div>
+								<div><p class="time">17:52</p><p>天内天内容聊天</p></div>
+							</div>
+						</div>
+						<div class="chat-to">
+							<div class="buble">
+								<div><p class="time">17:52</p><p>聊天内容2</p></div>
+								<div class="chat-avator"><img src="../assets/icons/avatar.jpeg" alt="用户头像" /></div>
+							</div>
+						</div>
+					</div>
+					<div class="chat-input-box">
+						<textarea name="" id="" cols="30" rows="10"></textarea>
+						<button>发送</button>
+					</div>
+				</div>
+				<div class="friend-box" v-for="item in state.friends" :key="item.id">
+					<div class="friend-info">
+						<img
+							class="friend-avatar"
+							:class="item.active ? 'active' : ''"
+							src="../assets/icons/bingmoli.jpg"
+						/>
+						<div style="padding-left: 1.875rem">
+							<p class="friend-name">{{ item.name }}</p>
+							<p class="playing">{{ item.play }}</p>
+						</div>
+					</div>
+					<img @click="goChat(item.id)" class="chat" src="../assets/icons/CenteredDots.png" />
 				</div>
 			</SwiperSlide>
 			<SwiperSlide class="swiper-slide">Slide 2</SwiperSlide>
@@ -60,9 +89,9 @@
 </template>
 
 <script setup>
-	import { Swiper, SwiperSlide } from "swiper/vue";
-	import "swiper/swiper.scss";
-	import { reactive } from "vue";
+	import { Swiper, SwiperSlide } from "swiper/vue"
+	import "swiper/swiper.scss"
+	import { reactive } from "vue"
 	const state = reactive({
 		current: 0,
 		// FIXME 图片路径需要改为服务器的路径
@@ -80,16 +109,25 @@
 			{ id: 3, name: "四只冰茉莉", active: false, play: "犯困中...", avatar: "" },
 		],
 		mySwiper: {},
-	});
+		goChat: false,
+	})
 	const onSwiper = (swiper) => {
-		state.mySwiper = swiper;
-	};
+		state.mySwiper = swiper
+	}
 	const onSlideChange = (x) => {
-		state.current = x.activeIndex;
-	};
+		state.current = x.activeIndex
+	}
 	const swiperChange = (num) => {
-		state.mySwiper.slideTo(num);
-	};
+		state.mySwiper.slideTo(num)
+	}
+	const goChat = (id) => {
+		console.log(id)
+		state.goChat = true
+		console.log(state.goChat)
+	}
+	const back = () => {
+		state.goChat = false
+	}
 </script>
 <style lang="scss" scoped>
 	@import "../scss/global.scss";
@@ -185,7 +223,18 @@
 		height: 100%;
 		padding: 1.25rem;
 	}
+	.swiper-slide {
+		height: 100%;
+		// display: flex;
+		// flex-direction: column;
+	}
 	.friend-box {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+	}
+	.friend-info {
 		display: flex;
 		align-items: center;
 	}
@@ -197,10 +246,82 @@
 			border-left: 5px solid #47a04f;
 		}
 	}
+	.chat {
+		width: 2rem;
+	}
 	.friend-name {
 		font-weight: bold;
 	}
 	.playing {
 		color: #bac4cb;
+	}
+	.chat-box {
+		height: 0rem;
+		overflow: hidden;
+		.chat-info {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		.chat-buble-box {
+			width: 100%;
+			.chat-avator {
+				width: 3rem;
+				height: 3rem;
+				padding: 0.4rem;
+				flex-shrink: 0;
+				img {
+					width: 100%;
+					height: 100%;
+				}
+			}
+			.buble {
+				display: flex;
+				align-items:flex-start;
+				p {
+					margin: 0;
+					padding: 0;
+				}
+				.time {
+					color: rgba(255, 255, 255, 0.5);
+					font-size: .075rem;
+				}
+			}
+			.chat-from {
+				width: 100%;
+				// height: 4rem;
+				display: flex;
+			}
+			.chat-to {
+				width: 100%;
+				// height: 4rem;
+				display: flex;
+				flex-direction: row-reverse;
+				text-align: right;
+			}
+		}
+		animation: hideChat 0.5s;
+			animation-fill-mode: forwards;
+		&.active {
+			animation: showChat 0.5s;
+			animation-fill-mode: forwards;
+		}
+	}
+
+	@keyframes showChat {
+		0% {
+			height: 0rem;
+		}
+		100% {
+			height: 100%;
+		}
+	}
+	@keyframes hideChat {
+		0% {
+			height: 100%;
+		}
+		100% {
+			height: 0rem;
+		}
 	}
 </style>

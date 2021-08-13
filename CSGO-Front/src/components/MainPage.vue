@@ -137,10 +137,6 @@
 			console.log("Received Message: " + evt.data)
 			// ws.close()
 		}
-		// const res = await $axios({
-		// 	url: "/string",
-		// })
-		// console.log(`res`, res)
 	})
 
 	const state = reactive({
