@@ -4,16 +4,18 @@ let wsObj = []
 
 // 监听koa/ws路由，是否有连接
 router.all("/koa/ws", (ctx) => {
-	// 给客户端发送链接成功信息
-	ctx.websocket.send("连接成功")
-	// 监听客户端发送过来的信息
-
-	ctx.websocket.on("message", (message) => {
-		console.log(message)
-		let msg = JSON.parse(message)
-		wsObj.push(msg.id)
+	const { id } = ctx.query
+	console.log("id :>> ", id)
+	wsObj[id] = ctx
+	wsObj[id].websocket.send("连接成功")
+	wsObj[id].websocket.on("message", (message) => {
+		const uid = JSON.parse(message).uId
+		if (!wsObj[uid]) {
+			wsObj[id].websocket.send(`${uid}未上线`)
+		} else {
+			wsObj[uid].websocket.send(message)
+		}
 	})
-	console.log("wsObj :>> ", wsObj)
 })
 
 module.exports = router
