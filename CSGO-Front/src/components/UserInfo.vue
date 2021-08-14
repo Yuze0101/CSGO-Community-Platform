@@ -39,30 +39,42 @@
 			@swiper="onSwiper"
 			:pagination="{ clickable: true }"
 		>
-			<SwiperSlide class="swiper-slide">
+			<SwiperSlide class="swiper-slide" :class="state.goChat ? 'active' : ''">
 				<div class="chat-box" :class="state.goChat ? 'active' : ''">
-					<div class="chat-info">
-						<div><span>【好友用户名】</span><span>状态</span></div>
-						<div @click="back()">
-							<span>x</span>
-						</div>
-					</div>
-					<div class="chat-buble-box">
-						<div class="chat-from">
-							<div class="buble">
-								<div class="chat-avator"><img src="../assets/icons/bingmoli.jpg" alt="好友头像" /></div>
-								<div><p class="time">17:52</p><p>天内天内容聊天</p></div>
+					<div class="chat-up">
+						<div class="chat-info">
+							<div><span>【好友用户名】</span><span>状态</span></div>
+							<div @click="back()">
+								<span>x</span>
 							</div>
 						</div>
-						<div class="chat-to">
-							<div class="buble">
-								<div><p class="time">17:52</p><p>聊天内容2</p></div>
-								<div class="chat-avator"><img src="../assets/icons/avatar.jpeg" alt="用户头像" /></div>
+						<div class="chat-buble-box">
+							<div class="chat-from">
+								<div class="buble">
+									<div class="chat-avator">
+										<img src="../assets/icons/bingmoli.jpg" alt="好友头像" />
+									</div>
+									<div>
+										<p class="time">17:52</p>
+										<p>天内天内容聊天</p>
+									</div>
+								</div>
+							</div>
+							<div class="chat-to">
+								<div class="buble">
+									<div>
+										<p class="time">17:52</p>
+										<p>聊天内容2</p>
+									</div>
+									<div class="chat-avator">
+										<img src="../assets/icons/avatar.jpeg" alt="用户头像" />
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 					<div class="chat-input-box">
-						<textarea name="" id="" cols="30" rows="10"></textarea>
+						<textarea class="text-area" name="" id="" cols="30" rows="10"></textarea>
 						<button>发送</button>
 					</div>
 				</div>
@@ -224,7 +236,14 @@
 		padding: 1.25rem;
 	}
 	.swiper-slide {
+		// height: calc(100vh - 14.375rem);
+		@include scrollbar;
 		height: 100%;
+		overflow: scroll;
+		&.active {
+			overflow: hidden;
+			@include scrollbar;
+		}
 		// display: flex;
 		// flex-direction: column;
 	}
@@ -256,52 +275,95 @@
 		color: #bac4cb;
 	}
 	.chat-box {
+		display: flex;
+		flex-direction: column;
 		height: 0rem;
 		overflow: hidden;
-		.chat-info {
+		.chat-up {
+			height: 90%;
 			display: flex;
-			justify-content: space-between;
-			align-items: center;
-		}
-		.chat-buble-box {
-			width: 100%;
-			.chat-avator {
-				width: 3rem;
+			flex-direction: column;
+			.chat-info {
 				height: 3rem;
-				padding: 0.4rem;
-				flex-shrink: 0;
-				img {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.chat-buble-box {
+				overflow: scroll;
+				@include scrollbar;
+				height: 100%;
+				width: 100%;
+				.chat-avator {
+					width: 3rem;
+					height: 3rem;
+					padding: 0.4rem;
+					flex-shrink: 0;
+					img {
+						width: 100%;
+						height: 100%;
+					}
+				}
+				.buble {
+					display: flex;
+					align-items: flex-start;
+					p {
+						margin: 0;
+						padding: 0;
+					}
+					.time {
+						color: rgba(255, 255, 255, 0.5);
+						font-size: 0.075rem;
+					}
+				}
+				.chat-from {
 					width: 100%;
-					height: 100%;
+					display: flex;
+				}
+				.chat-to {
+					width: 100%;
+					// height: 4rem;
+					display: flex;
+					flex-direction: row-reverse;
+					text-align: right;
 				}
 			}
-			.buble {
-				display: flex;
-				align-items:flex-start;
-				p {
-					margin: 0;
-					padding: 0;
-				}
-				.time {
-					color: rgba(255, 255, 255, 0.5);
-					font-size: .075rem;
+		}
+		.chat-input-box {
+			height: 10%;
+			display: flex;
+			.text-area {
+				color: #fff;
+				font-size: 1.2rem;
+				line-height: 1rem;
+				width: 85%;
+				border-top-left-radius: 10px;
+				border-bottom-left-radius: 10px;
+				box-sizing: border-box;
+				background-color: rgba(0, 0, 0, 0.2);
+				border: none;
+				padding: 5px;
+				height: 100%;
+				resize: none;
+				&:focus {
+					border: 3px solid rgba(255, 255, 255, 0.52);
+					outline: none;
 				}
 			}
-			.chat-from {
-				width: 100%;
-				// height: 4rem;
-				display: flex;
-			}
-			.chat-to {
-				width: 100%;
-				// height: 4rem;
-				display: flex;
-				flex-direction: row-reverse;
-				text-align: right;
+			button {
+				width: 15%;
+				height: 100%;
+				padding: 0;
+				background-color: rgba(255, 255, 255, 0.5);
+				border-top-right-radius: 10px;
+				border-bottom-right-radius: 10px;
+				border: none;
+				outline: none;
+				box-sizing: border-box;
 			}
 		}
 		animation: hideChat 0.5s;
-			animation-fill-mode: forwards;
+		animation-fill-mode: forwards;
 		&.active {
 			animation: showChat 0.5s;
 			animation-fill-mode: forwards;
@@ -313,12 +375,12 @@
 			height: 0rem;
 		}
 		100% {
-			height: 100%;
+			height: calc(100vh - 16.65rem);
 		}
 	}
 	@keyframes hideChat {
 		0% {
-			height: 100%;
+			height: calc(100vh - 16.65rem);
 		}
 		100% {
 			height: 0rem;
