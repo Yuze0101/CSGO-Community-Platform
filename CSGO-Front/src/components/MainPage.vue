@@ -122,21 +122,40 @@
 	import $axios from "@/api"
 
 	onMounted(async () => {
-		console.log("mounted")
-		console.log("index componentDidMount")
-		const ws = new WebSocket("ws://127.0.0.1:5001/koa/ws?id=22")
-		ws.onopen = (evt) => {
-			console.log("Connect open...")
-			let msg = JSON.stringify({
-				uId: 44,
-				data: "hello leihao",
-			})
-			ws.send(msg)
-		}
-		ws.onmessage = function (evt) {
-			console.log("Received Message: " + evt.data)
-			// ws.close()
-		}
+		// const res = await $axios({
+		// 	url: "/api",
+		// 	method: "get",
+		// 	data: {
+		// 		msg: "hello world",
+		// 	},
+		// })
+		// console.log(res)
+		// const wsTest = new WebSocket("ws://139.9.54.245:50000")
+		// wsTest.onopen = (evt) => {
+		// 	console.log("Connect open...")
+		// 	let msg = JSON.stringify({
+		// 		uId: 44,
+		// 		data: "hello 007",
+		// 	})
+		// 	wsTest.send(msg)
+		// }
+		// wsTest.onmessage = function (evt) {
+		// 	console.log("Received Message: " + evt.data)
+		// 	// ws.close()
+		// }
+		// const ws = new WebSocket("ws://127.0.0.1:5001/koa/ws?id=22")
+		// ws.onopen = (evt) => {
+		// 	console.log("Connect open...")
+		// 	let msg = JSON.stringify({
+		// 		uId: 44,
+		// 		data: "hello leihao",
+		// 	})
+		// 	ws.send(msg)
+		// }
+		// ws.onmessage = function (evt) {
+		// 	console.log("Received Message: " + evt.data)
+		// 	// ws.close()
+		// }
 	})
 
 	const state = reactive({
