@@ -32,6 +32,7 @@
 			</li>
 		</ul>
 		<Swiper
+			:allowTouchMove="false"
 			class="swiper"
 			:slides-per-view="1"
 			:space-between="50"
@@ -39,17 +40,58 @@
 			@swiper="onSwiper"
 			:pagination="{ clickable: true }"
 		>
-			<SwiperSlide class="swiper-slide">
-				<div class="friend-box" v-for="item in state.friends" :key="item.id">
-					<img
-						class="friend-avatar"
-						:class="item.active ? 'active' : ''"
-						src="../assets/icons/bingmoli.jpg"
-					/>
-					<div style="padding-left: 1.875rem">
-						<p class="friend-name">{{ item.name }}</p>
-						<p class="playing">{{ item.play }}</p>
+			<SwiperSlide class="swiper-slide" :class="state.goChat ? 'active' : ''">
+				<div class="chat-box" :class="state.goChat ? 'active' : ''">
+					<div class="chat-up">
+						<div class="chat-info">
+							<div><span>【好友用户名】</span><span>状态</span></div>
+							<div @click="back()">
+								<span>x</span>
+							</div>
+						</div>
+						<div class="chat-buble-box">
+							<div class="chat-from">
+								<div class="buble">
+									<div class="chat-avator">
+										<img src="../assets/icons/bingmoli.jpg" alt="好友头像" />
+									</div>
+									<div>
+										<p class="time">17:52</p>
+										<p>天内天内容聊天</p>
+									</div>
+								</div>
+							</div>
+							<div class="chat-to">
+								<div class="buble">
+									<div>
+										<p class="time">17:52</p>
+										<p>聊天内容2</p>
+									</div>
+									<div class="chat-avator">
+										<img src="../assets/icons/avatar.jpeg" alt="用户头像" />
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
+					<div class="chat-input-box">
+						<textarea class="text-area" cols="30" rows="10" v-model="state.chatInput"></textarea>
+						<button @click="sendMessage()">发送</button>
+					</div>
+				</div>
+				<div class="friend-box" v-for="item in state.friends" :key="item.id">
+					<div class="friend-info">
+						<img
+							class="friend-avatar"
+							:class="item.active ? 'active' : ''"
+							src="../assets/icons/bingmoli.jpg"
+						/>
+						<div style="padding-left: 1.875rem">
+							<p class="friend-name">{{ item.name }}</p>
+							<p class="playing">{{ item.play }}</p>
+						</div>
+					</div>
+					<img @click="goChat(item.id)" class="chat" src="../assets/icons/CenteredDots.png" />
 				</div>
 			</SwiperSlide>
 			<SwiperSlide class="swiper-slide">Slide 2</SwiperSlide>
@@ -60,9 +102,18 @@
 </template>
 
 <script setup>
-	import { Swiper, SwiperSlide } from "swiper/vue";
-	import "swiper/swiper.scss";
-	import { reactive } from "vue";
+	import { Swiper, SwiperSlide } from "swiper/vue"
+	import "swiper/swiper.scss"
+	import { reactive } from "vue"
+	import $axios from "@/api"
+	const wsTest = new WebSocket("ws://192.168.31.183:5001/koa/ws?id=44")
+	wsTest.onopen = (evt) => {
+		console.log("Connect open...")
+	}
+	wsTest.onmessage = function (evt) {
+		console.log("Received Message: " + evt.data)
+		// ws.close()
+	}
 	const state = reactive({
 		current: 0,
 		// FIXME 图片路径需要改为服务器的路径
@@ -74,22 +125,55 @@
 		],
 		// FIXME 图片路径需要改为服务器的路径
 		friends: [
-			{ id: 0, name: "一只冰茉莉", active: true, play: "正在玩CS:GO社区服", avatar: "" },
-			{ id: 1, name: "两只冰茉莉", active: true, play: "正在玩CS:GO休闲模式", avatar: "" },
+			{
+				id: 0,
+				name: "一只冰茉莉",
+				active: true,
+				play: "正在玩CS:GO社区服",
+				avatar: "",
+			},
+			{
+				id: 1,
+				name: "两只冰茉莉",
+				active: true,
+				play: "正在玩CS:GO休闲模式",
+				avatar: "",
+			},
 			{ id: 2, name: "三只冰茉莉", active: false, play: "摸鱼中...", avatar: "" },
 			{ id: 3, name: "四只冰茉莉", active: false, play: "犯困中...", avatar: "" },
 		],
+		chat: [{}],
 		mySwiper: {},
-	});
+		goChat: false,
+		currentID: 0,
+		chatInput: "",
+	})
 	const onSwiper = (swiper) => {
-		state.mySwiper = swiper;
-	};
+		state.mySwiper = swiper
+	}
 	const onSlideChange = (x) => {
-		state.current = x.activeIndex;
-	};
+		state.current = x.activeIndex
+	}
 	const swiperChange = (num) => {
-		state.mySwiper.slideTo(num);
-	};
+		state.mySwiper.slideTo(num)
+	}
+	const goChat = async (id) => {
+		state.goChat = true
+		state.currentID = id
+	}
+	const back = () => {
+		state.goChat = false
+		state.currentID = 0
+	}
+	const sendMessage = async () => {
+		console.log(state.chatInput)
+		let msg = JSON.stringify({
+			uId: 22,
+			data: state.chatInput,
+		})
+		wsTest.send(msg)
+		state.chatInput = "";
+	}
 </script>
 <style lang="scss" scoped>
 	@import "../scss/global.scss";
@@ -185,7 +269,25 @@
 		height: 100%;
 		padding: 1.25rem;
 	}
+	.swiper-slide {
+		// height: calc(100vh - 14.375rem);
+		@include scrollbar;
+		height: 100%;
+		overflow: scroll;
+		&.active {
+			overflow: hidden;
+			@include scrollbar;
+		}
+		// display: flex;
+		// flex-direction: column;
+	}
 	.friend-box {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+	}
+	.friend-info {
 		display: flex;
 		align-items: center;
 	}
@@ -197,10 +299,125 @@
 			border-left: 5px solid #47a04f;
 		}
 	}
+	.chat {
+		width: 2rem;
+	}
 	.friend-name {
 		font-weight: bold;
 	}
 	.playing {
 		color: #bac4cb;
+	}
+	.chat-box {
+		display: flex;
+		flex-direction: column;
+		height: 0rem;
+		overflow: hidden;
+		.chat-up {
+			height: 90%;
+			display: flex;
+			flex-direction: column;
+			.chat-info {
+				height: 3rem;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.chat-buble-box {
+				overflow: scroll;
+				@include scrollbar;
+				height: 100%;
+				width: 100%;
+				.chat-avator {
+					width: 3rem;
+					height: 3rem;
+					padding: 0.4rem;
+					flex-shrink: 0;
+					img {
+						width: 100%;
+						height: 100%;
+					}
+				}
+				.buble {
+					display: flex;
+					align-items: flex-start;
+					p {
+						margin: 0;
+						padding: 0;
+					}
+					.time {
+						color: rgba(255, 255, 255, 0.5);
+						font-size: 0.075rem;
+					}
+				}
+				.chat-from {
+					width: 100%;
+					display: flex;
+				}
+				.chat-to {
+					width: 100%;
+					// height: 4rem;
+					display: flex;
+					flex-direction: row-reverse;
+					text-align: right;
+				}
+			}
+		}
+		.chat-input-box {
+			height: 10%;
+			display: flex;
+			.text-area {
+				color: #fff;
+				font-size: 1.2rem;
+				line-height: 1rem;
+				width: 85%;
+				border-top-left-radius: 10px;
+				border-bottom-left-radius: 10px;
+				box-sizing: border-box;
+				background-color: rgba(0, 0, 0, 0.2);
+				border: none;
+				padding: 5px;
+				height: 100%;
+				resize: none;
+				&:focus {
+					border: 3px solid rgba(255, 255, 255, 0.52);
+					outline: none;
+				}
+			}
+			button {
+				width: 15%;
+				height: 100%;
+				padding: 0;
+				background-color: rgba(255, 255, 255, 0.5);
+				border-top-right-radius: 10px;
+				border-bottom-right-radius: 10px;
+				border: none;
+				outline: none;
+				box-sizing: border-box;
+			}
+		}
+		animation: hideChat 0.5s;
+		animation-fill-mode: forwards;
+		&.active {
+			animation: showChat 0.5s;
+			animation-fill-mode: forwards;
+		}
+	}
+
+	@keyframes showChat {
+		0% {
+			height: 0rem;
+		}
+		100% {
+			height: calc(100vh - 16.65rem);
+		}
+	}
+	@keyframes hideChat {
+		0% {
+			height: calc(100vh - 16.65rem);
+		}
+		100% {
+			height: 0rem;
+		}
 	}
 </style>

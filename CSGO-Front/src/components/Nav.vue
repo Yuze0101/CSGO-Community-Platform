@@ -14,7 +14,7 @@
 		navList: [
 			{ id: 0, routeTo: "main", src: "" },
 			{ id: 1, routeTo: "play", src: "" },
-			{ id: 2, routeTo: "", src: "" },
+			{ id: 2, routeTo: "login", src: "" },
 			{ id: 3, routeTo: "play", src: "" },
 		],
 	});

@@ -110,22 +110,47 @@
 		<div class="right"></div>
 	</div>
 </template>
-<script>
+<script setup>
 	import { Swiper, SwiperSlide } from "swiper/vue"
 	import "swiper/swiper.scss"
-	export default {
-		components: { Swiper, SwiperSlide },
-	}
-</script>
-<script setup>
 	import { onMounted, reactive } from "vue"
 	import $axios from "@/api"
 
-	onMounted(async () => {
-		const res = await $axios({
-			url: "/string",
-		})
-		console.log(`res`, res)
+	onMounted(() => {
+		// const res = await $axios({
+		// 	url: "/api",
+		// 	method: "get",
+		// 	data: {
+		// 		msg: "hello world",
+		// 	},
+		// })
+		// console.log(res)
+		// const wsTest = new WebSocket("ws://139.9.54.245:50000")
+		// wsTest.onopen = (evt) => {
+		// 	console.log("Connect open...")
+		// 	let msg = JSON.stringify({
+		// 		uId: 44,
+		// 		data: "hello 007",
+		// 	})
+		// 	wsTest.send(msg)
+		// }
+		// wsTest.onmessage = function (evt) {
+		// 	console.log("Received Message: " + evt.data)
+		// 	// ws.close()
+		// }
+		const ws = new WebSocket("ws://127.0.0.1:5001/koa/ws?id=22")
+		ws.onopen = (evt) => {
+			console.log("Connect open...")
+			let msg = JSON.stringify({
+				uId: 44,
+				data: "hello leihao",
+			})
+			ws.send(msg)
+		}
+		ws.onmessage = function (evt) {
+			console.log("Received Message: " + evt.data)
+			// ws.close()
+		}
 	})
 
 	const state = reactive({
@@ -145,6 +170,7 @@
 	const swiperChange = (num) => {
 		state.mySwiper.slideTo(num)
 	}
+	
 </script>
 
 <style lang="scss" scoped>
