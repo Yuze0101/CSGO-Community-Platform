@@ -75,8 +75,8 @@
 						</div>
 					</div>
 					<div class="chat-input-box">
-						<textarea class="text-area" name="" id="" cols="30" rows="10"></textarea>
-						<button>发送</button>
+						<textarea class="text-area" cols="30" rows="10" v-model="state.chatInput"></textarea>
+						<button @click="sendMessage()">发送</button>
 					</div>
 				</div>
 				<div class="friend-box" v-for="item in state.friends" :key="item.id">
@@ -105,6 +105,15 @@
 	import { Swiper, SwiperSlide } from "swiper/vue"
 	import "swiper/swiper.scss"
 	import { reactive } from "vue"
+	import $axios from "@/api"
+	const wsTest = new WebSocket("ws://192.168.31.183:5001/koa/ws?id=44")
+	wsTest.onopen = (evt) => {
+		console.log("Connect open...")
+	}
+	wsTest.onmessage = function (evt) {
+		console.log("Received Message: " + evt.data)
+		// ws.close()
+	}
 	const state = reactive({
 		current: 0,
 		// FIXME 图片路径需要改为服务器的路径
@@ -133,8 +142,11 @@
 			{ id: 2, name: "三只冰茉莉", active: false, play: "摸鱼中...", avatar: "" },
 			{ id: 3, name: "四只冰茉莉", active: false, play: "犯困中...", avatar: "" },
 		],
+		chat: [{}],
 		mySwiper: {},
 		goChat: false,
+		currentID: 0,
+		chatInput: "",
 	})
 	const onSwiper = (swiper) => {
 		state.mySwiper = swiper
@@ -145,13 +157,22 @@
 	const swiperChange = (num) => {
 		state.mySwiper.slideTo(num)
 	}
-	const goChat = (id) => {
-		console.log(id)
+	const goChat = async (id) => {
 		state.goChat = true
-		console.log(state.goChat)
+		state.currentID = id
 	}
 	const back = () => {
 		state.goChat = false
+		state.currentID = 0
+	}
+	const sendMessage = async () => {
+		console.log(state.chatInput)
+		let msg = JSON.stringify({
+			uId: 22,
+			data: state.chatInput,
+		})
+		wsTest.send(msg)
+		state.chatInput = "";
 	}
 </script>
 <style lang="scss" scoped>
