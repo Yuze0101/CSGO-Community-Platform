@@ -9,14 +9,12 @@ const bodyparser = require("koa-bodyparser")
 const logger = require("koa-logger")
 const router = require("koa-router")()
 
+
 const index = require("./routes/index")
 const users = require("./routes/users")
 const chat = require("./routes/chat")
 
-// NOTE 封装数据库sql语句以及使用
-// const { CREATE_TABLE } = require("./utils/sql");
-// const { query } = require("./utils/query");
-// query(CREATE_TABLE);
+
 
 // error handler
 onerror(app)
@@ -30,12 +28,11 @@ app.use(async (ctx, next) => {
 	await next()
 })
 
-
 // middlewares
 app.use(
 	bodyparser({
 		enableTypes: ["json", "form", "text"],
-	}),
+	})
 )
 app.use(json())
 app.use(logger())
@@ -44,7 +41,7 @@ app.use(require("koa-static")(__dirname + "/public"))
 app.use(
 	views(__dirname + "/views", {
 		extension: "pug",
-	}),
+	})
 )
 
 // logger

@@ -32,6 +32,7 @@
 			</li>
 		</ul>
 		<Swiper
+			:allowTouchMove="false"
 			class="swiper"
 			:slides-per-view="1"
 			:space-between="50"
@@ -115,8 +116,20 @@
 		],
 		// FIXME 图片路径需要改为服务器的路径
 		friends: [
-			{ id: 0, name: "一只冰茉莉", active: true, play: "正在玩CS:GO社区服", avatar: "" },
-			{ id: 1, name: "两只冰茉莉", active: true, play: "正在玩CS:GO休闲模式", avatar: "" },
+			{
+				id: 0,
+				name: "一只冰茉莉",
+				active: true,
+				play: "正在玩CS:GO社区服",
+				avatar: "",
+			},
+			{
+				id: 1,
+				name: "两只冰茉莉",
+				active: true,
+				play: "正在玩CS:GO休闲模式",
+				avatar: "",
+			},
 			{ id: 2, name: "三只冰茉莉", active: false, play: "摸鱼中...", avatar: "" },
 			{ id: 3, name: "四只冰茉莉", active: false, play: "犯困中...", avatar: "" },
 		],
