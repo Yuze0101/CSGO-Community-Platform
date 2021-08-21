@@ -106,7 +106,7 @@
 	import "swiper/swiper.scss"
 	import { reactive } from "vue"
 	import $axios from "@/api"
-	const wsTest = new WebSocket("ws://192.168.31.183:5001/koa/ws?id=44")
+	const wsTest = new WebSocket("ws://icarus-studio.top:5001/koa/ws?id=44")
 	wsTest.onopen = (evt) => {
 		console.log("Connect open...")
 	}
