@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import MainPage from "@/components/MainPage.vue";
+const Login = () => import("@/components/Login.vue");
 const PlayPage = () => import("@/components/PlayPage.vue");
 
 const routes = [
@@ -21,6 +22,12 @@ const routes = [
 				component: PlayPage,
 				meta: { index: 1 },
 			},
+			{
+				path: "login",
+				name: "login",
+				component: Login,
+				meta: { index: 2 },
+			}
 		],
 	},
 ];
