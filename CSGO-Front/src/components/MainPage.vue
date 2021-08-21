@@ -8,7 +8,7 @@
 					</div>
 					<div class="scroll">
 						<div class="card">
-							<img src="http://s2.328888.xyz/2021/08/06/114ca7c991bcf.jpg" class="card-img" />
+							<img src="../assets/imges/news-csgo.jpg" class="card-img" />
 
 							<div class="card-text">
 								<div class="card-time">2020-01-01</div>
@@ -19,7 +19,7 @@
 							</div>
 						</div>
 						<div class="card">
-							<img src="http://s2.328888.xyz/2021/08/06/114ca7c991bcf.jpg" class="card-img" />
+							<img src="../assets/imges/news-csgo.jpg" class="card-img" />
 
 							<div class="card-text">
 								<div class="card-time">2020-01-01</div>
@@ -30,7 +30,7 @@
 							</div>
 						</div>
 						<div class="card">
-							<img src="http://s2.328888.xyz/2021/08/06/114ca7c991bcf.jpg" class="card-img" />
+							<img src="../assets/imges/news-csgo.jpg" class="card-img" />
 							<div class="card-text">
 								<div class="card-time">2020-01-01</div>
 								<div class="card-title">A New Horizon</div>
@@ -116,42 +116,7 @@
 	import { onMounted, reactive } from "vue"
 	import $axios from "@/api"
 
-	onMounted(() => {
-		// const res = await $axios({
-		// 	url: "/api",
-		// 	method: "get",
-		// 	data: {
-		// 		msg: "hello world",
-		// 	},
-		// })
-		// console.log(res)
-		// const wsTest = new WebSocket("ws://139.9.54.245:50000")
-		// wsTest.onopen = (evt) => {
-		// 	console.log("Connect open...")
-		// 	let msg = JSON.stringify({
-		// 		uId: 44,
-		// 		data: "hello 007",
-		// 	})
-		// 	wsTest.send(msg)
-		// }
-		// wsTest.onmessage = function (evt) {
-		// 	console.log("Received Message: " + evt.data)
-		// 	// ws.close()
-		// }
-		const ws = new WebSocket("ws://127.0.0.1:5001/koa/ws?id=22")
-		ws.onopen = (evt) => {
-			console.log("Connect open...")
-			let msg = JSON.stringify({
-				uId: 44,
-				data: "hello leihao",
-			})
-			ws.send(msg)
-		}
-		ws.onmessage = function (evt) {
-			console.log("Received Message: " + evt.data)
-			// ws.close()
-		}
-	})
+	onMounted(() => {})
 
 	const state = reactive({
 		tabs: [
@@ -170,7 +135,6 @@
 	const swiperChange = (num) => {
 		state.mySwiper.slideTo(num)
 	}
-	
 </script>
 
 <style lang="scss" scoped>

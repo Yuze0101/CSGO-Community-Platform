@@ -106,7 +106,7 @@
 	import "swiper/swiper.scss"
 	import { reactive } from "vue"
 	import $axios from "@/api"
-	const wsTest = new WebSocket("ws://192.168.31.183:5001/koa/ws?id=44")
+	const wsTest = new WebSocket("ws://icarus-studio.top:5001/koa/ws?id=22")
 	wsTest.onopen = (evt) => {
 		console.log("Connect open...")
 	}
@@ -168,11 +168,11 @@
 	const sendMessage = async () => {
 		console.log(state.chatInput)
 		let msg = JSON.stringify({
-			uId: 22,
+			uId: 44,
 			data: state.chatInput,
 		})
 		wsTest.send(msg)
-		state.chatInput = "";
+		state.chatInput = ""
 	}
 </script>
 <style lang="scss" scoped>

@@ -43,7 +43,7 @@
 	.main {
 		height: 100vh;
 		padding: 0 6.25rem;
-		background-image: url(http://s2.328888.xyz/2021/08/05/00cc614272dc0.jpg);
+		background-image: url("../assets/imges/background-image-2.jpg");
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-attachment: fixed;
