@@ -168,11 +168,11 @@
 	const sendMessage = async () => {
 		console.log(state.chatInput)
 		let msg = JSON.stringify({
-			uId: 22,
+			uId: 44,
 			data: state.chatInput,
 		})
 		wsTest.send(msg)
-		state.chatInput = "";
+		state.chatInput = ""
 	}
 </script>
 <style lang="scss" scoped>
