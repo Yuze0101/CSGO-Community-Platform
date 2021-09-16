@@ -1,16 +1,9 @@
 <template>
-  <!-- <iframe src="http://192.184.32.53:3000" frameborder="0"></iframe> -->
+    <a href=""></a>
 </template>
 
 <script>
-export default {
-
-}
+    export default {}
 </script>
 
-<style>
-    iframe {
-        width: 100%;
-        height: 100%;
-    }
-</style>
+<style></style>

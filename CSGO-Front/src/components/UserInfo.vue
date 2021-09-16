@@ -44,38 +44,42 @@
 				<div class="chat-box" :class="state.goChat ? 'active' : ''">
 					<div class="chat-up">
 						<div class="chat-info">
-							<div><span>【好友用户名】</span><span>状态</span></div>
+							<div>
+								<span>--{{ state.chatInfo.targetName }}--</span><span>状态</span>
+							</div>
 							<div @click="back()">
 								<span>x</span>
 							</div>
 						</div>
-						<div class="chat-buble-box">
-							<div class="chat-from">
-								<div class="buble">
-									<div class="chat-avator">
-										<img src="../assets/icons/bingmoli.jpg" alt="好友头像" />
-									</div>
-									<div>
-										<p class="time">17:52</p>
-										<p>天内天内容聊天</p>
-									</div>
-								</div>
-							</div>
-							<div class="chat-to">
-								<div class="buble">
-									<div>
-										<p class="time">17:52</p>
-										<p>聊天内容2</p>
-									</div>
-									<div class="chat-avator">
-										<img src="../assets/icons/avatar.jpeg" alt="用户头像" />
+						<div class="chat-buble-box" ref="REF">
+							<template v-for="item in state.chatInfo.msg">
+								<div :class="item.state">
+									<div
+										class="buble"
+										:style="item.state == 'chat-from' ? '' : 'flex-direction: row-reverse;'"
+									>
+										<div class="chat-avator">
+											<!-- FIXME 改为动态头像 -->
+											<img src="../assets/icons/bingmoli.jpg" alt="好友头像" />
+										</div>
+										<div>
+											<p class="time">{{ item.time }}</p>
+											<p>{{ item.content }}</p>
+										</div>
 									</div>
 								</div>
-							</div>
+							</template>
 						</div>
 					</div>
 					<div class="chat-input-box">
-						<textarea class="text-area" cols="30" rows="10" v-model="state.chatInput"></textarea>
+						<textarea
+							class="text-area"
+							cols="30"
+							rows="10"
+							v-model="state.chatInput"
+							@focus="handleFocus"
+							@blur="handleBlur"
+						></textarea>
 						<button @click="sendMessage()">发送</button>
 					</div>
 				</div>
@@ -104,16 +108,12 @@
 <script setup>
 	import { Swiper, SwiperSlide } from "swiper/vue"
 	import "swiper/swiper.scss"
-	import { reactive } from "vue"
+	import { onMounted, reactive, watch, nextTick, ref, defineProps, defineEmit } from "vue"
 	import $axios from "@/api"
-	const wsTest = new WebSocket("ws://192.168.31.183:5001/koa/ws?id=44")
-	wsTest.onopen = (evt) => {
-		console.log("Connect open...")
-	}
-	wsTest.onmessage = function (evt) {
-		console.log("Received Message: " + evt.data)
-		// ws.close()
-	}
+	const props = defineProps(["isChatting"])
+	const emit = defineEmit(["focusChatting", "blurChatting"])
+	console.log(props.isChatting)
+	const wsTest = new WebSocket("ws://icarus-studio.top:5001/koa/ws?id=22")
 	const state = reactive({
 		current: 0,
 		// FIXME 图片路径需要改为服务器的路径
@@ -145,9 +145,29 @@
 		chat: [{}],
 		mySwiper: {},
 		goChat: false,
+		chatInfo: {
+			targetId: 0,
+			targetName: "一只冰茉莉",
+			msg: [],
+		},
+
 		currentID: 0,
 		chatInput: "",
 	})
+	const REF = ref()
+	onMounted(() => {
+		wsTest.onopen = (evt) => {
+			console.log("Connect open...")
+		}
+		wsTest.onmessage = function (evt) {
+			console.log("Received Message: " + evt.data)
+			const data = JSON.parse(evt.data)
+			state.chatInfo.msg.push({ state: "chat-from", time: getTime(), content: data.data })
+
+			// ws.close()
+		}
+	})
+
 	const onSwiper = (swiper) => {
 		state.mySwiper = swiper
 	}
@@ -165,15 +185,41 @@
 		state.goChat = false
 		state.currentID = 0
 	}
+
+	// getTime
+	const getTime = () => {
+		const date = new Date()
+		const hour = date.getHours()
+		const minute = date.getMinutes()
+		return `${hour}:${minute}`
+	}
+	const handleFocus = () => {
+		// props.chatting.focusChatting()
+		emit("focusChatting")
+	}
+	const handleBlur = () => {
+		// props.chatting.unFocusChatting()
+		emit("blurChatting")
+	}
 	const sendMessage = async () => {
 		console.log(state.chatInput)
 		let msg = JSON.stringify({
-			uId: 22,
+			uId: 44,
 			data: state.chatInput,
 		})
 		wsTest.send(msg)
-		state.chatInput = "";
+		state.chatInfo.msg.push({ state: "chat-to", time: getTime(), content: state.chatInput })
+		state.chatInput = ""
 	}
+	watch(
+		() => state.chatInfo.msg.length,
+		() => {
+			console.log(REF)
+			nextTick(() => {
+				REF.value.scrollTop = REF.value.scrollHeight
+			})
+		}
+	)
 </script>
 <style lang="scss" scoped>
 	@import "../scss/global.scss";
@@ -341,6 +387,7 @@
 				.buble {
 					display: flex;
 					align-items: flex-start;
+					animation: scaleIn 0.2s;
 					p {
 						margin: 0;
 						padding: 0;
@@ -418,6 +465,14 @@
 		}
 		100% {
 			height: 0rem;
+		}
+	}
+	@keyframes scaleIn {
+		0% {
+			transform: scale(0) translateY(-100px);
+		}
+		100% {
+			transform: scale(1) translateY(0px);
 		}
 	}
 </style>
